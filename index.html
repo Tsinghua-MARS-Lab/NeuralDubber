@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+    <head>
+	<meta name="generator" content="Hugo 0.88.1" />
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Neural Dubber: Dubbing for Videos According to Scripts">
+<title>
+Neural Dubber
+</title>
+
+<link href="/NeuralDubber/index.xml" rel="alternate" type="application/rss+xml" title="Neural Dubber" />
+
+        
+        <meta property="og:title" content="Neural Dubber" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="Neural Dubber: Dubbing for Videos According to Scripts"/>
+<meta property="og:url" content="https://tsinghua-mars-lab.github.io/NeuralDubber/"/>
+<meta property="og:site_name" content="Neural Dubber"/>
+
+
+
+
+
+
+
+        
+<link rel="shortcut icon" href="/NeuralDubber/img/fav.ico">
+
+
+        
+
+
+
+
+
+<link rel="stylesheet" href="/NeuralDubber/css/main.min.3679995ba0ed4b91edeef430fd34cce1e8b53c123f9993c4861941eee80b46b1.css" integrity="sha256-NnmZW6DtS5Ht7vQw/TTM4ei1PBI/mZPEhhlB7ugLRrE=" crossorigin="anonymous" media="screen">
+
+
+
+
+
+        
+
+
+<link rel="stylesheet" href="https://tsinghua-mars-lab.github.io/NeuralDubber/styles/owlCarousel.min.b1f26e29c43c61fe8b5a6f225b4ee7c5f969a7b33cfe512706271e07246d93d1.css" integrity="sha256-sfJuKcQ8Yf6LWm8iW07nxflpp7M8/lEnBiceByRtk9E=" crossorigin="anonymous" media="screen">
+
+    </head>
+
+    <body>
+        
+        <section id="top" class="hero is-small">
+            
+            <div class="hero-head"></div>
+
+            
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    
+                    <h1 class="bold-title ">
+                        Neural Dubber
+                    </h1>
+                    <div class="subtitle is-3 ">
+                        
+<h1 id="dubbing-for-videos-according-to-scripts" class="anchor-link"><a href="#dubbing-for-videos-according-to-scripts">Dubbing for Videos According to Scripts</a></h1>
+<DIV style="font-size: large">
+<br>
+Chenxu Hu<sup>1</sup>, Qiao Tian<sup>2</sup>, Tingle Li<sup>1,3</sup>, Yuping Wang<sup>2</sup>, Yuxuan Wang<sup>2</sup>, Hang Zhao<sup>1,3</sup>
+<!-- <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><sup>2</sup>, <a href="https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/">Yilun Wang</a><sup>3</sup>, <a href="http://people.csail.mit.edu/hangzhao/">Hang Zhao</a><sup>1</sup> -->
+<br>
+<br>
+<sup>1</sup>IIIS, Tsinghua University &nbsp;&nbsp;&nbsp;&nbsp;<sup>2</sup>ByteDance &nbsp;&nbsp;&nbsp;&nbsp;<sup>3</sup>Shanghai Qi Zhi Institute
+<br>
+<br>
+<p><strong>NeurIPS 2021</strong></p>
+<!-- <a href="mailto:liqi17@mails.tsinghua.edu.cn">liqi17@mails.tsinghua.edu.cn</a> -->
+<DIV>
+<br>
+<div class="social-icons" style="font-size:15px">
+    <a href="https://arxiv.org/abs/2110.08243">
+        <i class="fas fab fa-sticky-note" style="font-size:35px"></i>arXiv
+    </a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://github.com/Tsinghua-MARS-Lab/NeuralDubber">
+        <i class="fab fab fa-github" style="font-size: 35px"></i>Github link
+    </a>
+</div>
+                    </div>
+                    
+                    
+                    <div class="">
+                        <div class="social-icons">
+    
+</div>
+
+                    </div>
+                    
+                </div>
+            </div> 
+            
+
+            <div class="hero-foot ">
+                
+                
+<div class="container">
+    <hr>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        
+        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false" >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+        <div class="navbar-menu has-content-centered" id="navMenu">
+            
+            
+            
+            
+
+            
+            
+
+            
+
+            
+
+            
+            
+            
+            
+            
+            <a class="navbar-item" href="#abstract">Abstract</a>
+            
+            
+            
+            
+            
+            <a class="navbar-item" href="#task">Task</a>
+            
+            
+            
+            
+            
+            <a class="navbar-item" href="#method">Method</a>
+            
+            
+            
+            
+            
+            <a class="navbar-item" href="#results">Results</a>
+            
+            
+            
+            
+            
+            <a class="navbar-item" href="#demos">Demos</a>
+            
+            
+            
+            
+
+            
+            
+            <a class="navbar-item" href="#contact">Contact</a>
+            
+            
+
+            
+
+            
+            
+        </div>
+    </nav>
+    <hr>
+</div>
+
+
+            </div>
+        </section> 
+
+        
+        
+        
+
+        
+
+        
+
+        
+        
+        
+        
+        
+        
+
+        
+        <div class="section" id="abstract">
+            <div class="container">
+                <h2 class="title is-2 has-text-centered">Abstract</h2>
+                
+                <div class="markdown has-text-centered">
+                    <div align="left">
+Dubbing is a post-production process of re-recording actors' dialogues, which is extensively used in filmmaking and video production. It is usually performed manually by professional voice actors who read lines with proper prosody, and in synchronization with the pre-recorded videos. In this work, we propose Neural Dubber, the first neural network model to solve a novel automatic video dubbing (AVD) task: synthesizing human speech synchronized with the given video from the text. Neural Dubber is a multi-modal text-to-speech (TTS) model that utilizes the lip movement in the video to control the prosody of the generated speech. Furthermore, an image-based speaker embedding (ISE) module is developed for the multi-speaker setting, which enables Neural Dubber to generate speech with a reasonable timbre according to the speaker's face.  Experiments on the chemistry lecture single-speaker dataset and LRS2 multi-speaker dataset show that Neural Dubber can generate speech audios on par with state-of-the-art TTS models in terms of speech quality. Most importantly, both qualitative and quantitative evaluations show that Neural Dubber can control the prosody of synthesized speech by the video, and generate high-fidelity speech temporally synchronized with the video.
+</div>
+
+                </div>
+                
+            </div>
+            
+            <div class="container has-text-centered top-pad">
+    <a href="#top">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+</div>
+
+        </div>
+        <div class="container">
+            <hr>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+
+        
+        <div class="section" id="task">
+            <div class="container">
+                <h2 class="title is-2 has-text-centered">Task</h2>
+                
+                <div class="markdown has-text-centered">
+                    
+<h2 id="automatic-video-dubbing-avd" class="anchor-link"><a href="#automatic-video-dubbing-avd">Automatic Video Dubbing (AVD)</a></h2>
+<figure>
+<img src="images/avd-task-crop.png" style="padding:0px; margin:0px">
+<figcaption style="text-align:left">
+<!-- <font size="1" color="red">This is some text!</font> -->
+The schematic diagram of the automatic video dubbing (AVD) task. Given the video script and the video as input, the AVD task aims to synthesize speech that is temporally synchronized with the video. This is a scene where two people are talking with each other. The face picture is gray to indicate that the person was not talking at that time.
+</figcaption>
+</figure>
+<br>
+<div align="left">
+Given a sentence and a corresponding video clip (without audio), the goal of automatic video dubbing (AVD) is to synthesize natural and intelligible speech whose content is consistent with the sentence, and whose prosody is synchronized with the lip movement of the active speaker in the video. Compared to the traditional speech synthesis task which only generates natural and intelligible speech given the sentence, AVD task is more difficult due to the synchronization requirement.
+</div>
+                </div>
+                
+            </div>
+            
+            <div class="container has-text-centered top-pad">
+    <a href="#top">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+</div>
+
+        </div>
+        <div class="container">
+            <hr>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+
+        
+        <div class="section" id="method">
+            <div class="container">
+                <h2 class="title is-2 has-text-centered">Method</h2>
+                
+                <div class="markdown has-text-centered">
+                    <video controls preload="auto" width="100%" autoplay="autoplay" loop playsinline class="html-video">
+    <source src="videos/arch-bold-with-animation.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/arch-bold-with-animation.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<br>
+<!-- <br> -->
+<p style="front-size:5;text-align:left">
+First, we apply a phoneme encoder and a video encoder to process the phonemes and video frames respectively. After the encoding, both raw phonemes and viedo frames turn into sequences of hidden representations. Then we feed these hidden representations into the text-video aligner and get the expanded sequence Hmel with the same length as the target mel-spectrograms sequence. Meanwhile, a face image randomly selected from the video frames is input into image-based speaker embedding (ISE) module to generate a image-based speaker embedding (only used in multi-speaker setting). We add Hmel and ISE together and feed them into the variance adaptor to add some variance information (e.g., pitch and energy). Finally, we use the mel-spectrogram decoder to convert the adapted hidden sequence into mel-spectrograms sequence.
+</p>
+                </div>
+                
+            </div>
+            
+            <div class="container has-text-centered top-pad">
+    <a href="#top">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+</div>
+
+        </div>
+        <div class="container">
+            <hr>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+
+        
+        <div class="section" id="results">
+            <div class="container">
+                <h2 class="title is-2 has-text-centered">Results</h2>
+                
+                <div class="markdown has-text-centered">
+                    <DIV style="text-align:left">
+Since the AVD task aims to synthesize human speech synchronized with the video from text, the audio quality and the audio-visual synchronization (AV Sync) are the important evaluation criteria.
+<DIV>
+<br>
+<font size="4" color="blue" >Human Evaluation</font>
+<br>
+We conduct the mean opinion score (MOS) evaluation on the test set to measure the audio quality and the audio-visual synchronization.
+<br>
+<font size="4" color="blue" >Quantitative Evaluation</font>
+<br>
+In order to measure the synchronization between the generated speech and the video quantitatively, we use the pre-trained SyncNet which can explicitly test for synchronization between speech audio and lip movements in unconstrained videos in the wild. We adopt two metrics: Lip Sync Error - Distance (LSE-D) and Lip Sync Error - Confidence (LSE-C) that can be automatically calculated by the pre-trained SyncNet model.
+
+<h2 id="single-speaker-avd" class="anchor-link"><a href="#single-speaker-avd">Single-speaker AVD</a></h2>
+<p>We conduct qualitative and quantitative evaluation on the chem single-speaker dataset, to compare the audio quality and the audio-visual synchronization of the video clips generated by Neural Dubber with other systems.</p>
+<figure>
+<img src="images/single-mos.png" style="padding:0px; margin:0px">
+<figcaption style="text-align:left">
+<!-- <font size="1" color="red">This is some text!</font> -->
+Table 1: The evaluation results for the single-speaker AVD. The subjective metrics for audio quality and av sync are with 95% confidence intervals.
+</figcaption>
+</figure>
+<br>
+<p>It can be seen that Neural Dubber can surpass the Video-based Tacotron baseline and is on par with FastSpeech 2 in terms of audio quality, which demonstrates that Neural Dubber can synthesize high-quality speech. Furthermore, in terms of the av sync, Neural Dubber outperforms FastSpeech 2 and Video-based Tacotron by a big margin and matches GT (Mel + PWG) system in both qualitative and quantitative evaluations, which shows that Neural Dubber can control the prosody of speech and generate speech synchronized with the video.</p>
+
+<h2 id="multi-speaker-avd" class="anchor-link"><a href="#multi-speaker-avd">Multi-speaker AVD</a></h2>
+<p>We conduct human evaluation and quantitative evaluation on the LRS2 multi-speaker dataset to compare Neural Dubber with other systems in multi-speaker setting.</p>
+<figure>
+<img src="images/multi-mos.png" style="padding:0px; margin:0px">
+<figcaption style="text-align:left">
+<!-- <font size="1" color="red">This is some text!</font> -->
+Table 2: The evaluation results for the multi-speaker AVD. The subjective metrics for audio quality and av sync are with 95% confidence intervals.
+</figcaption>
+</figure>
+<br>
+We can see that Neural Dubber outperforms FastSpeech 2 by a significant margin in terms of audio quality, exhibiting the effectiveness of ISE in multi-speaker AVD. The qualitative and quantitative evaluations show that the speech synthesized by Neural Dubber is much better than that of FastSpeech 2 and is on par with the ground truth recordings in terms of synchronization. These results show that Neural Dubber can address the multi-speaker AVD which is more challenging than the single-speaker AVD.
+                </div>
+                
+            </div>
+            
+            <div class="container has-text-centered top-pad">
+    <a href="#top">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+</div>
+
+        </div>
+        <div class="container">
+            <hr>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+
+        
+        <div class="section" id="demos">
+            <div class="container">
+                <h2 class="title is-2 has-text-centered">Demos</h2>
+                
+                <div class="markdown has-text-centered">
+                    
+<h1 id="single-speaker-avd" class="anchor-link"><a href="#single-speaker-avd">Single-speaker AVD</a></h1>
+<table frame=void style="border:none; padding:0; margin:0"> 
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<!-- CASE 1 -->
+<tr style="button-margin:0">
+<td colspan="3" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >And we expect that we'll have an increase in that vapor intensity.
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt/10.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt/10.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt_mel/10.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt_mel/10.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT (Mel + PWG)
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/fs2/10.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/fs2/10.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+FastSpeech 2
+</td>
+</tr>
+<tr style="button-margin:0" >
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/video_based_taco/10.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/video_based_taco/10.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Video-based Tacotron
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/neural_dubber/10.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/neural_dubber/10.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Neural Dubber
+</td>
+</tr>
+<!-- CASE 2 -->
+<tr style="button-margin:0">
+<td colspan="3" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >Well let's just calculate from the ideal gas law.
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt/5.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt/5.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt_mel/5.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt_mel/5.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT (Mel + PWG)
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/fs2/5.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/fs2/5.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+FastSpeech 2
+</td>
+</tr>
+<tr style="button-margin:0" >
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/video_based_taco/5.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/video_based_taco/5.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Video-based Tacotron
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/neural_dubber/5.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/neural_dubber/5.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Neural Dubber
+</td>
+</tr>
+</table>
+<details>
+  <summary><font size="5" color="red" >More demos, click to expand!</font></summary>
+<!-- TABLE 2 -->
+<table frame=void style="border:none; padding:0; margin:0"> 
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<!-- CASE 3 -->
+<tr style="button-margin:0">
+<td colspan="3" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >So I can figure out the fraction of oxygen particles from the relationship between the pressures.
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt/4.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt/4.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt_mel/4.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt_mel/4.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT (Mel + PWG)
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/fs2/4.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/fs2/4.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+FastSpeech 2
+</td>
+</tr>
+<tr style="button-margin:0" >
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/video_based_taco/4.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/video_based_taco/4.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Video-based Tacotron
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/neural_dubber/4.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/neural_dubber/4.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Neural Dubber
+</td>
+</tr>
+<!-- CASE 4 -->
+<tr style="button-margin:0">
+<td colspan="3" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >So green is plus, green is plus, these are two wave functions coming together that have positive sign everywhere.
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt/9.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt/9.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt_mel/9.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt_mel/9.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT (Mel + PWG)
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/fs2/9.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/fs2/9.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+FastSpeech 2
+</td>
+</tr>
+<tr style="button-margin:0" >
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/video_based_taco/9.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/video_based_taco/9.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Video-based Tacotron
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/neural_dubber/9.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/neural_dubber/9.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Neural Dubber
+</td>
+</tr>
+<!-- CASE 5 -->
+<tr style="button-margin:0">
+<td colspan="3" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >So now if I know the pressure goes down by about half an atmosphere, well, the total pressure used to be 2.9.
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt/6.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt/6.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt_mel/6.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt_mel/6.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT (Mel + PWG)
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/fs2/6.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/fs2/6.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+FastSpeech 2
+</td>
+</tr>
+<tr style="button-margin:0" >
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/video_based_taco/6.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/video_based_taco/6.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Video-based Tacotron
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/neural_dubber/6.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/neural_dubber/6.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Neural Dubber
+</td>
+</tr>
+<!-- CASE 6 -->
+<tr style="button-margin:0">
+<td colspan="3" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >Just 100 thousandth of a mole dissolves in about a liter of water.
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt/7.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt/7.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/gt_mel/7.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/gt_mel/7.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+GT (Mel + PWG)
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/fs2/7.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/fs2/7.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+FastSpeech 2
+</td>
+</tr>
+<tr style="button-margin:0" >
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/video_based_taco/7.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/video_based_taco/7.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Video-based Tacotron
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/chem/neural_dubber/7.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/chem/neural_dubber/7.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+Neural Dubber
+</td>
+</tr>
+</table>
+</details>
+<br>
+<br>
+
+<h1 id="multi-speaker-avd" class="anchor-link"><a href="#multi-speaker-avd">Multi-speaker AVD</a></h1>
+<table frame=void style="border:none; padding:0; margin:0"> 
+<colgroup>
+<col width="25%">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+</colgroup>
+<!-- CASE 1 -->
+<tr style="button-margin:0">
+<td colspan="4" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >WHO KNEW THAT ONE MAN
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt/6.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt/6.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt_mel/6.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt_mel/6.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT (Mel+PWG)</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/fs2/6.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/fs2/6.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>FastSpeech 2</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/nd/6.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/nd/6.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>Neural Dubber</p>
+</td>
+</tr>
+<!-- CASE 2 -->
+<tr style="button-margin:0">
+<td colspan="4" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >THAT'S THE BEST KIND OF TEACHING
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt/7.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt/7.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt_mel/7.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt_mel/7.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT (Mel+PWG)</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/fs2/7.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/fs2/7.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>FastSpeech 2</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/nd/7.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/nd/7.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>Neural Dubber</p>
+</td>
+</tr>
+</table>
+<details>
+  <summary><font size="5" color="red" >More demos, click to expand!</font></summary>
+<!-- TABLE 2 -->
+<table frame=void style="border:none; padding:0; margin:0"> 
+<colgroup>
+<col width="25%">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+</colgroup>
+<!-- CASE 1 -->
+<tr style="button-margin:0">
+<td colspan="4" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >THE VERY BEST TALENTS
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt/9.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt/9.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt_mel/9.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt_mel/9.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT (Mel+PWG)</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/fs2/9.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/fs2/9.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>FastSpeech 2</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/nd/9.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/nd/9.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>Neural Dubber</p>
+</td>
+</tr>
+<!-- CASE 2 -->
+<tr style="button-margin:0">
+<td colspan="4" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >THE FIRST AND SECOND FLOOR FLATS
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt/1.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt/1.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt_mel/1.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt_mel/1.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT (Mel+PWG)</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/fs2/1.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/fs2/1.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>FastSpeech 2</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/nd/1.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/nd/1.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>Neural Dubber</p>
+</td>
+</tr>
+<!-- CASE 3 -->
+<tr style="button-margin:0">
+<td colspan="4" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >TIME NOW FOR ONE OF THE GREATEST TV COMEBACKS OF OUR TIME
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt/4.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt/4.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt_mel/4.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt_mel/4.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT (Mel+PWG)</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/fs2/4.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/fs2/4.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>FastSpeech 2</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/nd/4.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/nd/4.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>Neural Dubber</p>
+</td>
+</tr>
+<!-- CASE 4 -->
+<tr style="button-margin:0">
+<td colspan="4" style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<b><font size="large" color="blue" >YOU HAVE A PROBLEM WITH IT
+</font></b>
+</td>
+</tr>
+<tr style="button-margin:0">
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt/3.mp4" type="video/mp4">
+<p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt/3.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/gt_mel/3.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/gt_mel/3.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>GT (Mel+PWG)</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/fs2/3.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/fs2/3.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>FastSpeech 2</p>
+</td>
+<td style="background-color:#FFFFFF; border:none; buttom-padding:0; margin:0">
+<video controls class="html-video">
+<source src="videos/lrs2/nd/3.mp4" type="video/mp4">
+  <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="videos/lrs2/nd/3.mp4">download it</a> and watch it with your favorite video player!</p>
+</video>
+<p>Neural Dubber</p>
+</td>
+</tr>
+</table>
+</details>
+                </div>
+                
+            </div>
+            
+            <div class="container has-text-centered top-pad">
+    <a href="#top">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+</div>
+
+        </div>
+        <div class="container">
+            <hr>
+        </div>
+        
+        
+        
+        
+        
+        
+        <div class="section" id="contact">
+            <div class="container has-text-centered">
+                <h2 class="title is-2">Contact</h2>
+                <div class="markdown">
+                    <p>If you find our work useful in your research, please consider citing:</p>
+<blockquote style="text-align:left; background-color:#EEEEEE">
+@misc{hu2021neural,<br>
+      title={Neural Dubber: Dubbing for Videos According to Scripts},<br>
+      author={Chenxu Hu and Qiao Tian and Tingle Li and Yuping Wang and Yuxuan Wang and Hang Zhao},<br>
+      year={2021},<br>
+      eprint={2110.08243},<br>
+      archivePrefix={arXiv},<br>
+      primaryClass={eess.AS}<br>
+}
+</blockquote>
+<br>
+<DIV style="text-align:center">
+For more information, please contact: <a href="mailto:hu-cx21@mails.tsinghua.edu.cn">hu-cx21@mails.tsinghua.edu.cn</a>
+<DIV>
+                </div>
+                
+                <p>My current local time is <span id="time"></span>.</p>
+                
+                
+                <div class="social-icons">
+    
+</div>
+
+            </div>
+            
+            <div class="container has-text-centered top-pad">
+    <a href="#top">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+</div>
+
+        </div>
+        <div class="container">
+            <hr>
+        </div>
+        
+        
+        
+
+        <div class="section" id="footer">
+    <div class="container has-text-centered">
+    
+        <span class="footer-text">
+            
+        </span>
+    
+    </div>
+</div>
+
+
+        
+        
+
+
+<script src="https://tsinghua-mars-lab.github.io/NeuralDubber/js/bundle.f1741e9868b2f697e71cf8fccfcc12166540999b3d36f8fb9edd0882ba425d55.js" integrity="sha256-8XQemGiy9pfnHPj8z8wSFmVAmZs9Nvj7nt0IgrpCXVU="></script>
+
+
+
+
+
+
+        
+
+
+<script src="https://tsinghua-mars-lab.github.io/NeuralDubber/js/bundleOwlCarousel.bc6b73f0a36bf19c70c5df8fc352d322988ca2bc40743fb836ee7371d555c28a.js" integrity="sha256-vGtz8KNr8Zxwxd&#43;Pw1LTIpiMorxAdD&#43;4Nu5zcdVVwoo="></script>
+
+
+        
+        <script>
+            function update_localtime() {
+                const time = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia\/Shanghai', timeStyle: 'short' });
+                document.getElementById('time').innerHTML = time;
+            }
+            update_localtime();
+            
+            setInterval(update_localtime, 1000);
+        </script>
+        
+    </body>
+
+</html>
