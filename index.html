@@ -30,7 +30,7 @@ Neural Dubber
 
 
         
-<link rel="shortcut icon" href="/NeuralDubber/img/fav.ico">
+<link rel="shortcut icon" href="/NeuralDubber/images/marslab.png">
 
 
         
@@ -71,6 +71,8 @@ Neural Dubber
                     
                     <div class="subtitle is-3 ">
                         <DIV style="font-size:x-large">
+<div style="font-size:xx-large">Neural Dubber: Dubbing for Videos According to Scripts</div>
+<br>
 <a href="https://huchenxucs.github.io/">Chenxu Hu</a><sup>1</sup>, Qiao Tian<sup>2</sup>, Tingle Li<sup>1,3</sup>, Yuping Wang<sup>2</sup>, Yuxuan Wang<sup>2</sup>, Hang Zhao<sup>1,3</sup>
 <!-- <a href="https://people.csail.mit.edu/yuewang/">Yue Wang</a><sup>2</sup>, <a href="https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/">Yilun Wang</a><sup>3</sup>, <a href="http://people.csail.mit.edu/hangzhao/">Hang Zhao</a><sup>1</sup> -->
 <br>
@@ -80,23 +82,6 @@ Neural Dubber
 <br>
 <p><strong>NeurIPS 2021</strong></p>
 <br>
-<!-- <div class="social-icons" style="font-size:20px">
-    <a href="https://arxiv.org/abs/2110.08243">
-        <i class="fas fa-file" style="font-size:40px"></i>arXiv
-    </a>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://github.com/Tsinghua-MARS-Lab/NeuralDubber">
-        <i class="fab fa-github" style="font-size: 40px"></i>Github link
-    </a>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://mp.weixin.qq.com/s/I4BNwN25JOJoTs8stzDqUg">
-        <i class="fas fa-newspaper" style="font-size: 40px"></i>News(Chinese)
-    </a>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://slator.com/neural-dubber-tiktok-company-bytedance-explores-automated-dubbing/">
-        <i class="fas fa-newspaper" style="font-size: 40px"></i>News(English)
-    </a>
-</div> -->
 <div class="social-icons" style="font-size:20px">
     <table frame=void style="border:none; padding:0; margin:0; width:100%"> 
 <colgroup>  
@@ -254,13 +239,13 @@ Neural Dubber
 <h2 id="automatic-video-dubbing-avd" class="anchor-link"><a href="#automatic-video-dubbing-avd">Automatic Video Dubbing (AVD)</a></h2>
 <figure>
 <img src="images/avd-task-crop.png" style="padding:0px; margin:0px">
-<figcaption style="text-align:left">
+<figcaption style="text-align:justify">
 <!-- <font size="1" color="red">This is some text!</font> -->
 The schematic diagram of the automatic video dubbing (AVD) task. Given the video script and the video as input, the AVD task aims to synthesize speech that is temporally synchronized with the video. This is a scene where two people are talking with each other. The face picture is gray to indicate that the person was not talking at that time.
 </figcaption>
 </figure>
 <br>
-<div align="left" style="font-size:20px">
+<div align="left" style="font-size:20px; text-align:justify">
 Given a sentence and a corresponding video clip (without audio), the goal of automatic video dubbing (AVD) is to synthesize natural and intelligible speech whose content is consistent with the sentence, and whose prosody is synchronized with the lip movement of the active speaker in the video. Compared to the traditional speech synthesis task which only generates natural and intelligible speech given the sentence, AVD task is more difficult due to the synchronization requirement.
 </div>
                 </div>
@@ -291,7 +276,7 @@ Given a sentence and a corresponding video clip (without audio), the goal of aut
                 <h2 class="title is-2 has-text-centered">Abstract</h2>
                 
                 <div class="markdown has-text-centered">
-                    <div align="left" style="font-size:20px">
+                    <div align="left" style="font-size:20px; text-align:justify">
 Dubbing is a post-production process of re-recording actors' dialogues, which is extensively used in filmmaking and video production. It is usually performed manually by professional voice actors who read lines with proper prosody, and in synchronization with the pre-recorded videos. In this work, we propose Neural Dubber, the first neural network model to solve a novel automatic video dubbing (AVD) task: synthesizing human speech synchronized with the given video from the text. Neural Dubber is a multi-modal text-to-speech (TTS) model that utilizes the lip movement in the video to control the prosody of the generated speech. Furthermore, an image-based speaker embedding (ISE) module is developed for the multi-speaker setting, which enables Neural Dubber to generate speech with a reasonable timbre according to the speaker's face.  Experiments on the chemistry lecture single-speaker dataset and LRS2 multi-speaker dataset show that Neural Dubber can generate speech audios on par with state-of-the-art TTS models in terms of speech quality. Most importantly, both qualitative and quantitative evaluations show that Neural Dubber can control the prosody of synthesized speech by the video, and generate high-fidelity speech temporally synchronized with the video.
 </div>
 
@@ -329,7 +314,7 @@ Dubbing is a post-production process of re-recording actors' dialogues, which is
 </video>
 <br>
 <!-- <br> -->
-<div align="left" style="font-size:20px">
+<div align="left" style="font-size:20px; text-align:justify">
 First, we apply a phoneme encoder and a video encoder to process the phonemes and video frames respectively. After the encoding, both raw phonemes and viedo frames turn into sequences of hidden representations. Then we feed these hidden representations into the text-video aligner and get the expanded sequence Hmel with the same length as the target mel-spectrograms sequence. Meanwhile, a face image randomly selected from the video frames is input into image-based speaker embedding (ISE) module to generate a image-based speaker embedding (only used in multi-speaker setting). We add Hmel and ISE together and feed them into the variance adaptor to add some variance information (e.g., pitch and energy). Finally, we use the mel-spectrogram decoder to convert the adapted hidden sequence into mel-spectrograms sequence.
 </div>
                 </div>
@@ -360,7 +345,7 @@ First, we apply a phoneme encoder and a video encoder to process the phonemes an
                 <h2 class="title is-2 has-text-centered">Results</h2>
                 
                 <div class="markdown has-text-centered">
-                    <DIV style="text-align:left">
+                    <DIV style="text-align:justify">
 Since the AVD task aims to synthesize human speech synchronized with the video from text, the audio quality and the audio-visual synchronization (AV Sync) are the important evaluation criteria.
 <DIV>
 <br>
@@ -376,7 +361,7 @@ In order to measure the synchronization between the generated speech and the vid
 <p>We conduct qualitative and quantitative evaluation on the chem single-speaker dataset, to compare the audio quality and the audio-visual synchronization of the video clips generated by Neural Dubber with other systems.</p>
 <figure>
 <img src="images/single-mos.png" style="padding:0px; margin:0px">
-<figcaption style="text-align:left">
+<figcaption style="text-align:justify">
 <!-- <font size="1" color="red">This is some text!</font> -->
 Table 1: The evaluation results for the single-speaker AVD. The subjective metrics for audio quality and av sync are with 95% confidence intervals.
 </figcaption>
@@ -388,7 +373,7 @@ Table 1: The evaluation results for the single-speaker AVD. The subjective metri
 <p>We conduct human evaluation and quantitative evaluation on the LRS2 multi-speaker dataset to compare Neural Dubber with other systems in multi-speaker setting.</p>
 <figure>
 <img src="images/multi-mos.png" style="padding:0px; margin:0px">
-<figcaption style="text-align:left">
+<figcaption style="text-align:justify">
 <!-- <font size="1" color="red">This is some text!</font> -->
 Table 2: The evaluation results for the multi-speaker AVD. The subjective metrics for audio quality and av sync are with 95% confidence intervals.
 </figcaption>
